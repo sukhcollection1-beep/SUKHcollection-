@@ -1,0 +1,294 @@
+:root {
+    --gold: #c5a059;
+    --dark: #1a1a1a;
+    --light: #f9f9f9;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: var(--light);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo { font-family: 'Playfair Display'; font-size: 24px; letter-spacing: 2px; }
+
+.hero {
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #7bc1e6da;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 50px;
+}
+
+.product-card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.add-btn, .order-btn {
+    background: var(--dark);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover { background: var(--gold); }
+
+/* Modal Logic */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center; align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    animation: slideUp 0.4s ease-out;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(50px); } to { transform: translateY(0); } }
+#rules-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Dark background */
+    color: white;
+    padding: 15px;
+    z-index: 1000; /* Keeps it on top of other things */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    font-size: 14px;
+}
+
+.rules-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#rules-box p {
+    margin: 0;
+    padding-right: 10px;
+}
+
+#rules-box button {
+    background-color: #ffcc00; /* Yellow button */
+    border: none;
+    padding: 8px 15px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+#rules-box button:hover {
+    background-color: #e6b800;
+}
+.search-wrapper {
+    display: flex;
+    justify-content: flex-end; /* Puts the icon on the right */
+    padding: 10px 20px;
+}
+
+.search-box {
+    position: relative;
+    width: 40px; /* Starting width (just the icon) */
+    height: 40px;
+    background: #fff;
+    border-radius: 20px;
+    border: 2px solid #ffcc00;
+    transition: width 0.4s ease; /* The slide animation */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* When this class is added via JS, it expands */
+.search-box.active {
+    width: 250px; 
+}
+
+#productSearch {
+    width: 100%;
+    border: none;
+    padding: 0 15px;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+
+.search-icon {
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: #fff;
+    font-size: 18px;
+}
+/* Compact search container inside your navbar */
+.nav-search-container {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 20px;
+    height: 32px;
+    width: 32px; /* Small icon size */
+    transition: width 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+}
+
+/* Expansion logic */
+.nav-search-container.active {
+    width: 140px; /* Small enough for mobile */
+    background: #fff;
+    border-color: #ffcc00;
+}
+
+#productSearch {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding-left: 10px;
+    font-size: 13px;
+    display: none; /* Hide text until expanded */
+}
+
+.nav-search-container.active #productSearch {
+    display: block;
+}
+
+.search-trigger {
+    min-width: 32px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+}
+.black-icon {
+    filter: grayscale(100%) brightness(0); /* Forces any icon to pure black */
+    color: black;
+    font-size: 20px; /* Adjust this to change the icon size */
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.nav-logo {
+    height: 40px; /* Adjust this to change the size */
+    width: auto;  /* Keeps the logo from looking stretched */
+    display: block;
+    cursor: pointer;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+/* Thin Announcement Bar */
+.top-announcement {
+    background-color: #000;
+    color: #fff;
+    height: 10vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.scrolling-text {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-left 15s linear infinite;
+}
+
+.scrolling-text span {
+    padding: 0 50px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Short Header Styling */
+.short-navbar {
+    height: 45px; /* Very short & sleek */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+.item-logo {
+    height: 60px; /* Adjust this to change the size */
+    width: auto;  /* Keeps the logo from looking stretched */
+    display: block;
+    cursor: pointer;
+    align-items:center;
+}
+.vbb{
+    width: 30px;           /* Set a specific width */
+    height: 30px;          /* Set the same height */
+    border-radius: 30%;    /* This makes it a circle */
+/*    object-fit: cover;     /* Keeps the image from stretching */
+ /*  border: 2px solid #000;/* Optional: adds a nice black border around the circle */
+    display: block;
+    background-color:#f2f2f2da;
+}
+.copyright-box{
+  color:#454545da;
+}
